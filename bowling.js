@@ -7,7 +7,7 @@
  */
 
 function BowlingGame(pins) {
-  this.scoreCard = []; // TODO: store info and print card
+  this.scoreCard = []; 
   this.rolls = pins;
 
   // account for incomplete games
@@ -44,7 +44,7 @@ function BowlingGame(pins) {
   this.determineThird = function(frame) {
     if (this.isStrike(frame+2)) return "X";
     else if (this.isSpare(frame+1)) return "/";
-    else return this.rolls[frame+2];
+    else return this.rolls[frame+2].toString();
   }
   // get score
   this.getScore = function() {
@@ -60,13 +60,13 @@ function BowlingGame(pins) {
         if (i != 9) { // below 10th frame 
           this.scoreCard.push({ roll1: "X", 
             roll2: "", 
-            total: typeof(score) != "undefined" ? score : "" 
+            total: typeof(score) != "undefined" ? score.toString() : "" 
           });
         } else { // 10th frame has 3
           this.scoreCard.push({ roll1: "X", 
-            roll2: this.rolls[frame+1] == 10 ? "X" : this.rolls[frame+1], 
+            roll2: this.rolls[frame+1] == 10 ? "X" : this.rolls[frame+1].toString(), 
             roll3: this.determineThird(frame), 
-            total: typeof(score) != "undefined" ? score : "" 
+            total: typeof(score) != "undefined" ? score.toString() : "" 
           });
         }
         frame++;
@@ -74,15 +74,15 @@ function BowlingGame(pins) {
         score += 10 + this.spareBonus(frame);
         // insert into score card
         if (i != 9) { // below 10th frame 
-          this.scoreCard.push({ roll1: this.rolls[frame], 
+          this.scoreCard.push({ roll1: this.rolls[frame].toString(), 
             roll2: "/", 
-            total: typeof(score) != "undefined" ? score : "" 
+            total: typeof(score) != "undefined" ? score.toString() : "" 
           });
         } else { // 10th frame has 3
-          this.scoreCard.push({ roll1: this.rolls[frame], 
+          this.scoreCard.push({ roll1: this.rolls[frame].toString(), 
             roll2: "/", 
             roll3: this.determineThird(frame),
-            total: typeof(score) != "undefined" ? score : "" 
+            total: typeof(score) != "undefined" ? score.toString() : "" 
           });
         }
         frame += 2;
@@ -90,13 +90,13 @@ function BowlingGame(pins) {
         score += this.frameTotal(frame);
         // insert into score card
         if (i != 9) { // below 10th frame
-          this.scoreCard.push({ roll1: this.rolls[frame], 
-            roll2: this.rolls[frame+1], 
-            total: typeof(score) != "undefined" ? score : "" 
+          this.scoreCard.push({ roll1: this.rolls[frame].toString(), 
+            roll2: this.rolls[frame+1].toString(), 
+            total: typeof(score) != "undefined" ? score.toString() : "" 
           });
         } else { // 10th frame has 3
-          this.scoreCard.push({ roll1: this.rolls[frame],
-            roll2: this.rolls[frame+1],
+          this.scoreCard.push({ roll1: this.rolls[frame].toString(),
+            roll2: this.rolls[frame+1].toString(),
             roll3: "" // w/o spare || strike 3rd frame is empty
           }); 
         }
