@@ -7,7 +7,8 @@ const sprintf = require("sprintf").sprintf;
 
 // CLASS BLUEPRINT FOR GAME
 function BowlingGame(pins) {
-  this.scoreCard = []; 
+  this.scoreCard = [];
+  this.completeGame = false; 
   this.rolls = pins;
   this.endTotal;
 
@@ -48,8 +49,10 @@ function BowlingGame(pins) {
       } 
     }
 
-    // record potential incomplete frame
+    // record potential incomplete frame and denote complete game
     if (i <= 9 && frame < this.rolls.length) { this.record(i, frame, -1); }
+    else if (i == 10) { this.completeGame = true; }
+
     // set instance variable for score
     this.endTotal = score;
   }
@@ -206,15 +209,16 @@ function BowlingGame(pins) {
     process.stdout.write("\n");
 
     // total score info
-    var msg = (this.scoreCard.length < 10) ? 
-      `YOUR GAME IS INCOMPLETE, BUT YOUR CURRENT SCORE: ${this.endTotal}` :
-      `GOOD GAME! YOUR END SCORE: ${this.endTotal}`
-    console.log(msg);
+    var msg = (this.completeGame) ? 
+      `GOOD GAME! YOUR END SCORE: ${this.endTotal}` :
+      `YOUR GAME IS INCOMPLETE, BUT YOUR CURRENT SCORE: ${this.endTotal}`;
+      
+    process.stdout.write(msg + "\n");
   }
   // print out ASCII art
   this.drawAlley = function() {
     // dope text finesse
-    console.log(`
+    process.stdout.write(`
                            ! ! ! !
                         ." ! ! !  //
                       ."   ! !   //
@@ -230,7 +234,8 @@ function BowlingGame(pins) {
   ."     O             //
          |/
         /|
-        / |`);
+        / |` + "\n\n");
+    process.stdout.write("LOOK AT THAT FORM!\n")
   }
 }
 
