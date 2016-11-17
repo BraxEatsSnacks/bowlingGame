@@ -1,0 +1,12 @@
+{
+  "name": "bowlingGame",
+  "description": "bowling game for MustWin Application",
+  "version": "0.0.1",
+  "author": "Braxton Gunter <braxton.gun@gmail.com>",
+  "main": "bowling.js",
+  "dependencies": {
+    "sprintf": "^0.1.5"
+  },
+  "repository": "https://github.com/BraxEatsSnacks/bowlingGame",
+  "license": "MIT"
+}
