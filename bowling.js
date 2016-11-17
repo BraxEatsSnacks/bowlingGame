@@ -8,6 +8,7 @@
 
 function BowlingGame(pins) {
   this.scoreCard = []; 
+  this.endTotal;
   this.rolls = pins;
 
   // account for incomplete games
@@ -22,7 +23,10 @@ function BowlingGame(pins) {
   }
   // total from frame
   this.frameTotal = function(frame) {
-    return this.rolls[frame] + this.rolls[frame+1];
+    if (this.rolls[frame] != undefined && this.rolls[frame+1] != undefined) {
+      return this.rolls[frame] + this.rolls[frame+1];
+    } 
+    return 0; // outside of range
   }
   // strike?
   this.isStrike = function(frame) {
@@ -38,71 +42,80 @@ function BowlingGame(pins) {
   }
   // value of next roll
   this.spareBonus = function(frame) {
-    return this.rolls[frame+2];
+    if (this.rolls[frame+2] != undefined) {
+      return this.rolls[frame+2];
+    }
+    return 0; // outside of range
   }
-  // last round - scorecard 3rd box
-  this.determineThird = function(frame) {
-    if (this.isStrike(frame+2)) return "X";
-    else if (this.isSpare(frame+1)) return "/";
-    else return this.rolls[frame+2].toString();
+  // enter info into scorecard structure
+  this.record = function(i, frame, score) {
+    if (i == 9) { // 10th frame: 3 potential rolls
+      var roll1, roll2, roll3;
+
+      roll1 = this.isStrike(frame) ? "X" : ((this.rolls[frame] != undefined) ? this.rolls[frame].toString() : "");
+      roll2 = this.isStrike(frame+1) ? "X" : ((this.rolls[frame+1] != undefined) ? this.rolls[frame+1].toString() : "");
+      roll3 = this.isStrike(frame+2) ? "X" : ((this.rolls[frame+2] != undefined) ? this.rolls[frame+2].toString() : "");
+
+      // add to scorecard
+      this.scoreCard.push({
+        "roll1": roll1,
+        "roll2": roll2,
+        "roll3": roll3,
+        "score": (score < 0) ? "" : score.toString()
+      });
+    
+    } else {
+      var roll1, roll2;
+
+      if (this.isStrike(frame)) {
+        roll1 = "X";
+        roll2 = "";
+      } else if (this.isSpare(frame)) {
+        roll1 = (this.rolls[frame] != undefined) ? this.rolls[frame].toString() : "";
+        roll2 = "/"; 
+      } else {
+        roll1 = (this.rolls[frame] != undefined) ? this.rolls[frame].toString() : "";
+        roll2 = (this.rolls[frame+1] != undefined) ? this.rolls[frame+1].toString() : "";
+      }
+
+      // add to scorecard
+      this.scoreCard.push({
+        "roll1": roll1,
+        "roll2": roll2,
+        "score": (score < 0) ? "" : score.toString()
+      });
+    }
   }
   // get score
   this.getScore = function() {
     var score = 0;
     var frame = 0; // treat as half frame except in case of X
+    var i = 0; // whole frame iteration
 
     // 10 rounds by default but until incomplete game
     var frameCount = this.frameCount();
-    for (var i=0; i<frameCount; i++) {
+    for (; i<frameCount; i++) {
       if (this.isStrike(frame)) { // strike
         score += 10 + this.strikeBonus(frame);
-        // insert into score card
-        if (i != 9) { // below 10th frame 
-          this.scoreCard.push({ roll1: "X", 
-            roll2: "", 
-            total: typeof(score) != "undefined" ? score.toString() : "" 
-          });
-        } else { // 10th frame has 3
-          this.scoreCard.push({ roll1: "X", 
-            roll2: this.rolls[frame+1] == 10 ? "X" : this.rolls[frame+1].toString(), 
-            roll3: this.determineThird(frame), 
-            total: typeof(score) != "undefined" ? score.toString() : "" 
-          });
-        }
-        frame++;
+        // insert into scorecard
+        this.record(i, frame++, score);
       } else if (this.isSpare(frame)) { // spare
         score += 10 + this.spareBonus(frame);
-        // insert into score card
-        if (i != 9) { // below 10th frame 
-          this.scoreCard.push({ roll1: this.rolls[frame].toString(), 
-            roll2: "/", 
-            total: typeof(score) != "undefined" ? score.toString() : "" 
-          });
-        } else { // 10th frame has 3
-          this.scoreCard.push({ roll1: this.rolls[frame].toString(), 
-            roll2: "/", 
-            roll3: this.determineThird(frame),
-            total: typeof(score) != "undefined" ? score.toString() : "" 
-          });
-        }
-        frame += 2;
+        // insert into scorecard
+        this.record(i, frame, score);
+        frame+=2;
       } else { // open frame
         score += this.frameTotal(frame);
-        // insert into score card
-        if (i != 9) { // below 10th frame
-          this.scoreCard.push({ roll1: this.rolls[frame].toString(), 
-            roll2: this.rolls[frame+1].toString(), 
-            total: typeof(score) != "undefined" ? score.toString() : "" 
-          });
-        } else { // 10th frame has 3
-          this.scoreCard.push({ roll1: this.rolls[frame].toString(),
-            roll2: this.rolls[frame+1].toString(),
-            roll3: "" // w/o spare || strike 3rd frame is empty
-          }); 
-        }
-        frame += 2; 
+        // insert into scorecard
+        this.record(i, frame, score);
+        frame+=2;
       } 
     }
+
+    // record potential incomplete frame
+    if (i <= 9 && frame < this.rolls.length) { this.record(i, frame, -1); }
+
+    this.endTotal = score;
     return score;
   }
 }
