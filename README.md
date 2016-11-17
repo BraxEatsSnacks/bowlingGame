@@ -18,10 +18,10 @@ So when running the program it should look something like this:
 #### See? It's just like real bowling, except without the potential dissapointment!
 Bowl with me through the journey of more success, my friend. It's truly lit.
 
-Also, it doesn't have to a complete game, so be sure to check that out. If you 
-do happen to play a full game and don't want your score card to look weird, 
-make sure your terminal is at least _95 characters_
-wide!
+Also, it doesn't have to a complete game but I decided to only tally total score by frame,
+because of all of the special rules with spares and strikes so be sure to check that 
+out. If you do happen to play a full game and don't want your score card to look 
+weird, make sure your terminal is at least _95 characters_ wide!
 
 &nbsp;
 
