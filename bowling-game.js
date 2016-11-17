@@ -1,5 +1,6 @@
-// MustWintern Application ~ Braxton
+// MustWintern Application ~ Braxton Gunter <braxton.gun@gmail.com>
 
+/* CLASS FILE */
 
 // output formatting
 const sprintf = require("sprintf").sprintf;
@@ -232,3 +233,6 @@ function BowlingGame(pins) {
         / |`);
   }
 }
+
+// create exportable module of class
+module.exports = BowlingGame;
