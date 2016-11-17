@@ -13,7 +13,7 @@ screen. I even threw in some cool ASCII art!
 
 So when running the program it should look something like this:
 
-	` ./bowling.js 8 1 10 5 5 8 0 10 10 9 1 8 1 9 1 10 7 2 `
+	 ./bowling 8 1 10 5 5 8 0 10 10 9 1 8 1 9 1 10 7 2
 
 #### See? It's just like real bowling, except without the potential dissapointment!
 Bowl with me through the journey of more success, my friend. It's truly lit.
@@ -40,7 +40,7 @@ _Feel free to run it yourself. But make sure you have **Node.js** installed!_
     ``` npm install ```
 3. You must love the repo.
 
-    ``` ./bowling.js <argv> ```
+    ``` ./bowling <argv> ```
 4. You should be good to go!
 
 &nbsp;
