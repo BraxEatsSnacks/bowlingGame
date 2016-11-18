@@ -5,6 +5,12 @@
 // output formatting
 const sprintf = require("sprintf").sprintf;
 
+// exit on error
+function die(msg) {
+  process.stdout.write(msg+"\n");
+  process.exit();
+}
+
 // CLASS BLUEPRINT FOR GAME
 function BowlingGame(pins) {
   this.scoreCard = [];
@@ -35,7 +41,8 @@ function BowlingGame(pins) {
       if (this.isStrike(frame)) { // strike
         score += 10 + this.strikeBonus(frame);
         // insert into scorecard
-        this.record(i, frame++, score);
+        this.record(i, frame, score);
+        frame++;
       } else if (this.isSpare(frame)) { // spare
         score += 10 + this.spareBonus(frame);
         // insert into scorecard
@@ -104,9 +111,10 @@ function BowlingGame(pins) {
     var count = 0; // roll counter
     for (var i=0; i<this.rolls.length; i++) {
       if (count > 20) { break; } // game has MAX 10 frames
-      if (this.isStrike(this.rolls[i])) { count += 2; } // strike completes frame
+      if (this.rolls[i] == 10) { count += 2; } // strike completes frame
       else { count++; }
     }
+    console.log(count);
     return Math.floor(count/2);
   }
   // total from frame

@@ -25,6 +25,7 @@ because of all of the special rules with spares and strikes so be sure to check 
 out. If you do happen to play a full game and don't want your score card to look 
 weird, make sure your terminal is at least _95 characters_ wide!
 
+
 FILES:
 - bowling-game.js -- JS file which consists of the class BowlingGame
 - bowling -- executable JS file which makes use of an instance of BowlingGame (this is the one we call!)
