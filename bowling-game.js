@@ -49,6 +49,8 @@ function BowlingGame(pins) {
         this.record(i, frame, score);
         frame+=2;
       } else { // open frame
+        // exit w/ error -- number too large
+        if (this.frameTotal(frame) > 10) { die("Invalid numbers"); } 
         score += this.frameTotal(frame);
         // insert into scorecard
         this.record(i, frame, score);
