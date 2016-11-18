@@ -57,7 +57,7 @@ function BowlingGame(pins) {
     }
 
     // record potential incomplete frame and denote complete game
-    if (i <= 9 && frame < this.rolls.length) { this.record(i, frame, -1); }
+    if (i < 9 && frame < this.rolls.length) { this.record(i, frame, -1); }
     else if (i == 10) { this.completeGame = true; }
 
     // set instance variable for score
@@ -110,11 +110,10 @@ function BowlingGame(pins) {
   this.frameCount = function() {
     var count = 0; // roll counter
     for (var i=0; i<this.rolls.length; i++) {
-      if (count > 20) { break; } // game has MAX 10 frames
       if (this.rolls[i] == 10) { count += 2; } // strike completes frame
       else { count++; }
     }
-    console.log(count);
+    if (count > 20) { count = 20; } // game has MAX 10 frames
     return Math.floor(count/2);
   }
   // total from frame
