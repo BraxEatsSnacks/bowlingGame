@@ -1,4 +1,4 @@
-# Terminal Bowling Game
+# Yung Bowling Game
 
 -- created using **Node.js** --
 
@@ -23,12 +23,14 @@ Bowl with me through the journey of more success, my friend. It's truly lit.
 Also, it doesn't have to a complete game but I decided to only tally total score by frame,
 because of all of the special rules with spares and strikes so be sure to check that 
 out. If you do happen to play a full game and don't want your score card to look 
-weird, make sure your terminal is at least _95 characters_ wide!
+weird, make sure your terminal is at least **_95 characters_** wide!
 
 
-FILES:
-- **_bowling-game.js_** - `JS file which consists of the class BowlingGame`
-- **_bowling__** - `executable JS file which makes use of an instance of BowlingGame (this is the one we call!)`
+##### DIRECTORY STRUCTURE
+
+* _bowling-game.js_ - `JS file which consists of the class BowlingGame (i.e. the meat & potatoes)`
+* _bowling_ - `executable JS file which makes use of an instance of BowlingGame (this is the one we call!)`
+* _package.json_ - `real mandem know issa Node ting`
 
 &nbsp;
 
