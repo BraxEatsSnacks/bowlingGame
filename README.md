@@ -1,4 +1,4 @@
-# MustWintern Application -- Bowling Game
+# Terminal Bowling Game
 
 -- created using **Node.js** --
 
@@ -7,7 +7,7 @@ It will take in the number of pins knocked down on each roll, and prints out a
 neat, formatted score card to your console -- just like the ones at the alley but on a computer 
 screen. I even threw in some cool ASCII art! 
 
-(Markdown won't let me show it here so I got the next best thing.)
+(Unforunately, Markdown won't let me show the formatting so I got the next best thing.)
 
 ![Bowling Ball Prep](https://media.giphy.com/media/l46CxnIvqj8BiLZLy/giphy.gif)
 
@@ -27,8 +27,8 @@ weird, make sure your terminal is at least _95 characters_ wide!
 
 
 FILES:
-- bowling-game.js -- JS file which consists of the class BowlingGame
-- bowling -- executable JS file which makes use of an instance of BowlingGame (this is the one we call!)
+- **_bowling-game.js_** - `JS file which consists of the class BowlingGame`
+- **_bowling__** - `executable JS file which makes use of an instance of BowlingGame (this is the one we call!)`
 
 &nbsp;
 
