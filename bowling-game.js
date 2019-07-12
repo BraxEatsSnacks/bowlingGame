@@ -14,7 +14,7 @@ function die(msg) {
 // CLASS BLUEPRINT FOR GAME
 function BowlingGame(pins) {
   this.scoreCard = [];
-  this.completeGame = false; 
+  this.completeGame = false;
   this.rolls = pins;
   this.endTotal;
 
@@ -50,12 +50,12 @@ function BowlingGame(pins) {
         frame+=2;
       } else { // open frame
         // exit w/ error -- number too large
-        if (this.frameTotal(frame) > 10) { die("Invalid numbers"); } 
+        if (this.frameTotal(frame) > 10) { die("Invalid numbers"); }
         score += this.frameTotal(frame);
         // insert into scorecard
         this.record(i, frame, score);
         frame+=2;
-      } 
+      }
     }
 
     // record potential incomplete frame and denote complete game
@@ -82,7 +82,7 @@ function BowlingGame(pins) {
         "roll3": roll3,
         "score": (score < 0) ? " " : score.toString()
       });
-    
+
     } else {
       var roll1, roll2;
 
@@ -91,7 +91,7 @@ function BowlingGame(pins) {
         roll2 = " ";
       } else if (this.isSpare(frame)) {
         roll1 = (this.rolls[frame] != undefined) ? this.rolls[frame].toString() : " ";
-        roll2 = "/"; 
+        roll2 = "/";
       } else {
         roll1 = (this.rolls[frame] != undefined) ? this.rolls[frame].toString() : " ";
         roll2 = (this.rolls[frame+1] != undefined) ? this.rolls[frame+1].toString() : " ";
@@ -122,7 +122,7 @@ function BowlingGame(pins) {
   this.frameTotal = function(frame) {
     if (this.rolls[frame] != undefined && this.rolls[frame+1] != undefined) {
       return this.rolls[frame] + this.rolls[frame+1];
-    } 
+    }
     return 0; // outside of range
   }
   // strike?
@@ -146,7 +146,7 @@ function BowlingGame(pins) {
   }
 
   /* OUTPUT INFORMATION */
- 
+
   // print out formatted scorecard
   this.printCard = function() {
 
@@ -180,15 +180,15 @@ function BowlingGame(pins) {
     // rolls
     process.stdout.write("|  ROLLS   |");
     for (var i=0; i<this.scoreCard.length; i++) {
-      if (i == 9) { // last frame of full game has 3 
-        process.stdout.write(sprintf(" %s : %s  %s |", 
-          this.scoreCard[i]["roll1"], 
-          this.scoreCard[i]["roll2"], 
+      if (i == 9) { // last frame of full game has 3
+        process.stdout.write(sprintf(" %s : %s  %s |",
+          this.scoreCard[i]["roll1"],
+          this.scoreCard[i]["roll2"],
           this.scoreCard[i]["roll3"])
         );
       } else {
-        process.stdout.write(sprintf(" %s : %s |", 
-          this.scoreCard[i]["roll1"], 
+        process.stdout.write(sprintf(" %s : %s |",
+          this.scoreCard[i]["roll1"],
           this.scoreCard[i]["roll2"])
         );
       }
@@ -202,7 +202,7 @@ function BowlingGame(pins) {
       } else {
         process.stdout.write(sprintf("  %-3s  |", this.scoreCard[i]["score"]));
       }
-    
+
     }
     process.stdout.write("\n");
     // bottom
@@ -214,14 +214,13 @@ function BowlingGame(pins) {
         process.stdout.write("--------");
       }
     }
-    process.stdout.write("+");
-    process.stdout.write("\n");
+    process.stdout.write("+\n");
 
     // total score info
-    var msg = (this.completeGame) ? 
+    var msg = (this.completeGame) ?
       `GOOD GAME! YOUR END SCORE: ${this.endTotal}` :
       `YOUR GAME IS INCOMPLETE, BUT YOUR CURRENT SCORE: ${this.endTotal}`;
-      
+
     process.stdout.write(msg + "\n");
   }
   // print out ASCII art
@@ -239,7 +238,7 @@ function BowlingGame(pins) {
           ."               //
         ."      . '.      //
       ."      '     '    //
-    ."                  // 
+    ."                  //
   ."     O             //
          |/
         /|
@@ -249,4 +248,4 @@ function BowlingGame(pins) {
 }
 
 // create exportable module of class
-module.exports = BowlingGame;
+odule.exports = BowlingGame;
